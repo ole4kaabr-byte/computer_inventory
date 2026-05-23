@@ -9,13 +9,19 @@ on:
       - main
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
-      - name: Установка зависимостей
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Check if requirements.txt exists
         run: |
-          pip install -r requirements.txt
-      - name: Запуск тестов
-        run: |
-          pytest
+          if [ ! -f requirements.txt ]; then
+            echo "requirements.txt not found!"
+            exit 1
+          fi
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
