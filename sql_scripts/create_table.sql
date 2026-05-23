@@ -2,9 +2,9 @@
 CREATE TABLE IF NOT EXISTS Equipment (
     ID INTEGER PRIMARY KEY AUTOINCREMENT,
     Type VARCHAR(50),
-    Brand VARCHAR(50),
+    Brand VARCHAR(60),
     Model VARCHAR(50),
-    SerialNumber VARCHAR(100) UNIQUE,
+    SerialNumber VARCHAR(70) UNIQUE,
     Location VARCHAR(50),
     Status VARCHAR(20),
     PurchaseDate DATE,
