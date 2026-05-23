@@ -44,3 +44,24 @@ def add_equipment(type_, brand, model, serial_number, location, status, purchase
         print(f"Ошибка при добавлении: {e}")
     finally:
         conn.close()
+def update_equipment(id, **kwargs):
+    conn = get_connection()
+    cursor = conn.cursor()
+    fields = []
+    values = []
+    for key, value in kwargs.items():
+        fields.append(f"{key} = ?")
+        values.append(value)
+    values.append(id)
+    sql = f"UPDATE Equipment SET {', '.join(fields)} WHERE ID = ?"
+    cursor.execute(sql, values)
+    conn.commit()
+    conn.close()
+    print(f"Объект с ID={id} обновлен.")
+def delete_equipment(id):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM Equipment WHERE ID = ?", (id,))
+    conn.commit()
+    conn.close()
+    print(f"Объект с ID={id} удален.")
